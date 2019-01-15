@@ -29,3 +29,44 @@ EtatDialogue est une Enumération
 	// Dialogue terminé
 	Terminé = "COMPLETED"	
 FIN
+
+PROCÉDURE AlexaEnvoieRéponseProgressive( pclRequête est une AlexaRequête, LOCAL sRéponse est une chaîne ANSI ) : booléen
+
+	SI pclRequête = Null ALORS
+		ErreurDéclenche( 1, "Requête invalide" )
+		RENVOYER Faux
+	FIN
+	
+	// Lecture du contexte de la requête
+	oContexte est un Variant = pclRequête.Contexte
+		
+	stRequête est une httpRequête
+	stRequête.Méthode = httpPost
+	stRequête.ContentType = typeMimeJSON
+
+	// Point d'entrée pour la transmission
+	stRequête.URL = ( "" + oContexte.System.apiEndpoint ) + "/v1/directives"
+	
+	// Access token de l'API récupérer depuis le contexte de la requête originale
+	stRequête.Entête[ "Authorization" ] = "Bearer " + ( "" + oContexte.System.apiAccessToken )
+	
+	// Construit la directive
+	oRéponse est un Variant
+	oRéponse.header.requestId = pclRequête.IDRequête
+	oRéponse.directive.type = "VoicePlayer.Speak"
+	oRéponse.directive.speech = sRéponse
+	
+	// Sérialise la directive
+	stRequête..Contenu = VariantVersJSON( oRéponse )
+	
+	// Envoie la directive
+	stRéponse est une httpRéponse = HTTPEnvoie( stRequête )
+	
+	// La réponse a bien été envoyée
+	SI stRéponse.CodeEtat = 204 ALORS
+		RENVOYER Vrai
+	FIN
+	
+	// Transmet l'erreur
+	ErreurDéclenche( 2, "Une erreur est survenue :" + [ RC ] + stRéponse.DescriptionCodeEtat + [ RC ] + ErreurInfo )
+	RENVOYER Faux
