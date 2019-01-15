@@ -5,7 +5,7 @@
  
 <body>
  
-    Insérer vos textes, images, tableaux...
+    Je ne suis pas encore formé au html, 
  
 </body>
 </html>
