@@ -17,3 +17,15 @@ EtatConfirmation est une Enumération
 	// Confirmation : refusé
 	Refusé = "DENIED"	
 FIN
+
+EtatDialogue est une Enumération
+	
+	// Dialogue démarré
+	Débuté = "STARTED"
+	
+	// Dialogue en cours
+	EnCours = "IN_PROGRESS"
+	
+	// Dialogue terminé
+	Terminé = "COMPLETED"	
+FIN
