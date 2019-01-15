@@ -1,0 +1,19 @@
+TypeRéponseParlée est une Enumération
+	
+	// Alexa devra énoncer le texte tel qu'il est écrit
+	Texte = "PlainText"	
+	
+	// Alexa devra interpréter le texte SSML
+	SSML  = "SSML"
+FIN
+EtatConfirmation est une Enumération
+	
+	// Confirmation : N/A
+	Aucun = "NONE"
+	
+	// Confirmation : confirmé
+	Confirmé = "CONFIRMED"
+	
+	// Confirmation : refusé
+	Refusé = "DENIED"	
+FIN

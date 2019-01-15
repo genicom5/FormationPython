@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title> Titre de votre page </title>
+    <title> Mon projetd e formation avec openclassroom </title>
 </head>
  
 <body>
